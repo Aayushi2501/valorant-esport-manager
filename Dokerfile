@@ -1,14 +1,7 @@
-# Stage 1: Build
-FROM node:18 AS builder
-WORKDIR /src
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-# Stage 2: Production
-FROM node:18-alpine
-WORKDIR /src
-COPY --from=builder /src ./
-EXPOSE 3000
-CMD ["npm", "run", "start:prod"]
+FROM node:18.12.1 As dev
+WORKDIR /app
+ADD . /app/
+RUN yarn
+RUN yarn prisma-all
+RUN yarn build
+CMD ["yarn", "start:prod"]
