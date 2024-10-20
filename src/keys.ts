@@ -1,0 +1,1 @@
+export const MAX_FIND_ALL_LIMIT = 50;

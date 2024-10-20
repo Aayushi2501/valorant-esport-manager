@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model PlayerStats {
+  id                        Int      @id @default(autoincrement())
+  playerName                String
+  org                       String?
+  agents                    Json
+  roundsPlayed              String
+  rating                    String
+  averageCombatScore        String
+  killDeaths                String
+  killAssistsSurvivedTraded String
+  averageDamagePerRound     String
+  killsPerRound             String
+  assistsPerRound           String
+  firstKillsPerRound        String
+  firstDeathsPerRound       String
+  headshotPercentage        String
+  clutchSuccessPercentage   String
+  createdAt                 DateTime @default(now())
+}
+
+model TeamRanking {
+  id                 Int      @id @default(autoincrement())
+  rank               String
+  team               String
+  country            String
+  lastPlayed         String
+  lastPlayedTeam     String
+  lastPlayedTeamLogo String
+  record             String
+  earnings           String
+  logo               String
+  createdAt          DateTime @default(now())
+}
+
+model News {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  date        String
+  author      String
+  urlPath     String
+  createdAt   DateTime @default(now())
+}
+
+model Match {
+  id             Int      @id @default(autoincrement())
+  team1          Team     @relation("Team1", fields: [team1Id], references: [id])
+  team2          Team     @relation("Team2", fields: [team2Id], references: [id])
+  team1Id        Int
+  team2Id        Int
+  flag1          String
+  flag2          String
+  score1         String
+  score2         String
+  mapNumber      String
+  currentMap     String
+  timeUntilMatch String
+  matchEvent     String
+  matchSeries    String
+  unixTimestamp  String
+  matchPage      String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+model Team {
+  id     Int     @id @default(autoincrement())
+  name   String
+  Match1 Match[] @relation("Team1")
+  Match2 Match[] @relation("Team2")
+}
+
+model MatchResult {
+  id              Int      @id @default(autoincrement())
+  team1           String
+  team2           String
+  score1          String
+  score2          String
+  flag1           String
+  flag2           String
+  time_completed  String
+  round_info      String
+  tournament_name String
+  match_page      String
+  tournament_icon String
+  createdAt       DateTime @default(now())
+}
