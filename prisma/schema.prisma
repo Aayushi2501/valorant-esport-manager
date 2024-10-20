@@ -97,6 +97,6 @@ model MatchResult {
   round_info      String
   tournament_name String
   match_page      String
-  tournament_icon String
+  tournament_icon String?
   createdAt       DateTime @default(now())
 }
