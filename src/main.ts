@@ -5,9 +5,15 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: true,  // Allows requests from any origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,  // Set this if you're using authentication (cookies)
+  });
+
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Quanten-API')
+    .setTitle('Valorant-API')
     .setVersion('1.0.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
