@@ -1,7 +1,0 @@
-.git
-.gitignore
-.dockerignore
-
-node_modules
-prisma/docs
-prisma/schema.svg
