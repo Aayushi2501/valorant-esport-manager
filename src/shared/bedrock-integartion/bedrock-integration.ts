@@ -26,7 +26,7 @@ import {
     UnauthorizedException,
 } from '@nestjs/common';
 
-const MODEL_ID = process.env.MODEL_ID || 'amazon.titan-text-lite-v1';
+const MODEL_ID = process.env.MODEL_ID || 'amazon.titan-text-express-v1';
 const PROMPT = process.env.PROMPT || 'Hi, who are you?';
 
 
@@ -122,7 +122,7 @@ export class BedrockService {
     async invokeModelRunTimeCommand(prompt:string) {
 
         const clientRunTime = await new BedrockRuntimeClient({
-            region: process.env.REGION || 'us-east-1', credentials: {
+            region: process.env.REGION || 'ap-southeast-2', credentials: {
                 secretAccessKey: process.env.SECRET_ACCESS_KEY,
                 accessKeyId: process.env.ACCESS_KEY_ID
             }
